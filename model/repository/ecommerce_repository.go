@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"dropshipbe/common/constant"
 	"dropshipbe/dropshipbe"
@@ -12,6 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type EcommerceRepository interface {
@@ -180,21 +182,29 @@ func (d *defaultEcommerceRepository) SaveMessage(ctx context.Context, ask string
 	panic("unimplemented")
 }
 
-// SearchProductsSemantic implements [EcommerceRepository].
 func (d *defaultEcommerceRepository) SearchProductsSemantic(ctx context.Context, embedding []float32, query string) (string, error) {
-
 	var products []model.Product
-	err := d.db.WithContext(ctx).Raw("SELECT name, price, description FROM products WHERE status = 'active' ORDER BY embedding <-> ? LIMIT 3", pgvector.NewVector(embedding)).Scan(&products).Error
 
-	if err != nil || len(products) == 0 {
-		return "No matching products found.", err
+	err := d.db.WithContext(ctx).
+		Where("status = ?", "active").
+		Order(clause.Expr{SQL: "embedding <=> ?", Vars: []interface{}{pgvector.NewVector(embedding)}}).
+		Limit(5).
+		Find(&products).Error
+
+	if err != nil {
+		return "Error occurred while searching for products.", err
 	}
 
-	result := "Found matching products:\n"
+	if len(products) == 0 {
+		return "No matching products found.", nil
+	}
+
+	var result strings.Builder
+	result.WriteString("Here are the best matching products from the database:\n")
 	for _, p := range products {
-		result += fmt.Sprintf("- %s | Price: %.2f | Description: %s\n", p.Name, p.Price, p.Description)
+		fmt.Fprintf(&result, "- Name: %s | Price: %.2f | Description: %s\n", p.Name, p.Price, p.Description)
 	}
-	return result, nil
+	return result.String(), nil
 }
 
 // TrackShipment implements [EcommerceRepository].

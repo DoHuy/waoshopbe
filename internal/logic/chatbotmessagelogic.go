@@ -40,7 +40,10 @@ func defineAITools() []openai.Tool {
 				Parameters: jsonschema.Definition{
 					Type: jsonschema.Object,
 					Properties: map[string]jsonschema.Definition{
-						"semantic_query": {Type: jsonschema.String, Description: "The semantic keyword or query for searching"},
+						"semantic_query": {
+							Type:        jsonschema.String,
+							Description: "DO NOT pass the user's raw message. Instead, generate a highly detailed, descriptive paragraph of the ideal product the user is looking for. Include potential features, materials, use cases, and style based on their intent.",
+						},
 					},
 					Required: []string{"semantic_query"},
 				},
