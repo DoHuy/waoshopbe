@@ -115,7 +115,7 @@ cp env.sample .env
 ```
 *Note: Ensure the database credentials match those in `dropship-deployment/docker-compose.yml`.*
 
-### Start Infrastructure
+### Start Infrastructure (recommended)
 Use Docker Compose to start PostgreSQL, Redis, and Kafka:
 ```bash
 docker-compose -f dropship-deployment/docker-compose.yml up redis kafka1 kafka2 kafka3 db -d
@@ -149,7 +149,10 @@ You need to run the following components (preferably in separate terminals):
 
 ---
 
-### Run Backend System with only docker compose
+### Start Infrastructure with only docker compose
+
+Run Backend System with only docker compose
+
 Copy env
 
 ```bash
