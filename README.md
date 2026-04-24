@@ -206,6 +206,7 @@ The storefront will be available at `http://localhost:3000`.
 - `make diff name=migration_name`: Create a new migration based on GORM models.
 - `make down`: Revert the latest migration.
 
+
 ---
 
 ## 🚀 Production Deployment & Scaling
@@ -285,3 +286,9 @@ spec:
 -   **Tracing (OpenTelemetry)**: Full request tracing from Gateway -> RPC -> DB to identify latency bottlenecks in high-traffic scenarios.
 -   **Structured Logging**: All microservices emit JSON-formatted logs for easy ingestion into ELK/Loki stacks.
 -   **Real-time Metrics**: Dashboards for monitoring Kafka consumer lag, Redis hit ratios, and Database query performance.
+
+---
+
+## Asked Questions
+
+For assignment questions, please refer to my [FAQs.md](./FAQs.md).
