@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # ==========================================
   # 1. DATABASE & CACHE
@@ -23,6 +21,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+      
   redis:
     image: redis:7-alpine
     container_name: uk_dropship_redis
@@ -130,7 +129,7 @@ services:
   
   dropship-rpc:
     build:
-      context: . 
+      context: ..
       args:
         BUILD_TARGET: dropshipbe.go
     container_name: uk_dropship_rpc
@@ -146,6 +145,8 @@ services:
     command: ["./app_service", "-f", "etc/dropshipbe.yaml"]
     networks:
       - uk_dropship_net
+    volumes:
+      - ../.env:/app/.env
     depends_on:
       db:
         condition: service_healthy 
@@ -156,7 +157,7 @@ services:
 
   dropship-gateway:
     build:
-      context: .
+      context: ..
       args:
         BUILD_TARGET: gateway/gateway.go
     container_name: uk_dropship_gateway
@@ -170,13 +171,15 @@ services:
       - "8888:8888"
     networks:
       - uk_dropship_net
+    volumes:
+      - ../.env:/app/.env
     depends_on:
       dropship-rpc:
         condition: service_started
 
   dropship-mq:
     build:
-      context: .
+      context: ..
       args:
         BUILD_TARGET: mq/mq.go
     container_name: uk_dropship_mq
@@ -190,6 +193,8 @@ services:
     command: ["./app_service", "-f", "etc/mq.yaml"]
     networks:
       - uk_dropship_net
+    volumes:
+      - ../.env:/app/.env
     depends_on:
       dropship-rpc:
         condition: service_started
