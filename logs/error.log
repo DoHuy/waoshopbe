@@ -1,0 +1,29 @@
+2026-04-16T15:37:15.282+07:00	[31;1m error [0;22m	Lỗi khi tạo review sản phẩm: ERROR: insert or update on table "product_reviews" violates foreign key constraint "fk_products_reviews" (SQLSTATE 23503)	caller=logic/createproductreviewlogic.go:46
+2026-04-16T15:37:15.283+07:00	[31;1m error [0;22m	fail - 127.0.0.1:8080/dropshipbe.Dropshipbe/CreateProductReview - product_id:1 name:"Nguy\341\273\205n V\304\203n A" email:"nguyenvana@example.com" avatar:"1774248637152917000_singapore-1.jpg" rating:5 comment:"S\341\272\243n ph\341\272\251m r\341\272\245t tuy\341\273\207t v\341\273\235i, \304\221\303\263ng g\303\263i c\341\272\251n th\341\272\255n!" images:"1774248637152917000_singapore-1.jpg" images:"1774248637152917000_singapore-1.jpg" videos:"1774248637152917000_singapore-1.jpg" - rpc error: code = Unknown desc = ERROR: insert or update on table "product_reviews" violates foreign key constraint "fk_products_reviews" (SQLSTATE 23503)	duration=17.7ms	caller=clientinterceptors/durationinterceptor.go:35	trace=27f777db8eb72a53a7519652d6c5e32d	span=043014de03184e63
+2026-04-16T15:37:15.283+07:00	[31;1m error [0;22m	[HTTP] [103;90;1m 500 [0;0;22m - [46;97;1m POST [0;0;22m /api/v1/products/reviews - [::1]:50510 - PostmanRuntime/7.51.0
+POST /api/v1/products/reviews HTTP/1.1
+Host: localhost:8888
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 426
+Content-Type: application/json
+Postman-Token: 7df32a6d-061b-4b33-9324-271466475115
+User-Agent: PostmanRuntime/7.51.0
+
+{
+    "product_id": 1,
+    "name": "Nguyễn Văn A",
+    "email": "nguyenvana@example.com",
+    "avatar": "1774248637152917000_singapore-1.jpg",
+    "rating": 5,
+    "comment": "Sản phẩm rất tuyệt vời, đóng gói cẩn thận!",
+    "images": [
+        "1774248637152917000_singapore-1.jpg",
+        "1774248637152917000_singapore-1.jpg"
+    ],
+    "videos": [
+        "1774248637152917000_singapore-1.jpg"
+    ]
+}	span=da3e0fa6f7622715	duration=18.2ms	caller=handler/loghandler.go:169	trace=27f777db8eb72a53a7519652d6c5e32d

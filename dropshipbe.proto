@@ -1,0 +1,503 @@
+syntax = "proto3";
+
+package dropshipbe;
+option go_package="./dropshipbe";
+
+import "validate/validate.proto";
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+
+message DefaultRequest {
+  string country_code = 1;
+}
+
+message Category {
+  uint64 id = 1;
+  optional uint64 parent_id = 2;
+  string country_code = 3;
+  string name = 4;
+  string slug = 5;
+  string description = 6;
+  string image_url = 7;
+  bool is_active = 8;
+  string alt = 9;
+  string button_text = 10;
+}
+
+message Gallery {
+  uint64 id = 1;
+  uint64 product_id = 2;
+  string image_url = 3;
+  string video_url = 4;
+  string alt_text = 5;
+  string media_type = 6;
+  bool highlight = 7;
+  int32 position = 8;
+}
+
+message OptionValue {
+  uint64 id = 1;
+  uint64 option_id = 2;
+  string value = 3;
+  string color_code = 4;
+}
+
+message Option {
+  uint64 id = 1;
+  uint64 product_id = 2;
+  string name = 3;
+  string code = 4;
+  int32 position = 5;
+  repeated OptionValue option_values = 6; 
+}
+
+message VariantOption {
+  uint64 option_id = 1;
+  string option_code = 2;
+  uint64 option_value_id = 3;
+  string option_value = 4;
+}
+
+message Variant {
+  uint64 id = 1;
+  uint64 product_id = 2;
+  string sku = 3;
+  string barcode = 4;
+  float price = 5;
+  float compare_at_price = 6;
+  float cost_price = 7;
+  int32 stock_quantity = 8;
+  repeated VariantOption options = 9;
+  bool is_active = 10;
+  string created_at = 11;
+  string image_url = 12;
+}
+
+message PriceTier {
+  uint64 id = 1;
+  uint64 product_id = 2;
+  string name = 3;
+  int32 qty = 4;
+  string savings = 5;
+  float discount = 6;
+  float price = 7;
+  optional string tag = 8;
+  string tag_class = 9;
+  string created_at = 10;
+  int32 position = 11;
+}
+
+message Product {
+  uint64 id = 1;
+  string country_code = 2;
+  string name = 3;
+  string slug = 4;
+  string wow_delay = 5;
+  map<string, string> metadata = 6;
+  repeated Category categories = 7;
+  repeated Gallery galleries = 8;
+  repeated Gallery description_images = 9;
+  repeated Option options = 10;
+  repeated Variant variants = 11;
+  repeated PriceTier product_price_tiers = 12;
+  string description = 13;
+  string status = 14;
+  bool is_featured = 15;
+  bool is_trending = 16;
+  bool is_new = 17;
+  bool is_on_sale = 18;
+  string meta_title = 19;
+  string meta_description = 20;
+  string vendor = 21;
+  string product_type = 22;
+  string badge = 23;
+  string sale_label = 24;
+  string sale_tag = 25;
+  bool is_out_of_sale = 26;
+  int32 sold = 27;
+  float rating = 28;
+  int32 review_count = 29;
+  bool in_stock = 30;
+  string flash_sale_end_time = 31;
+  repeated string tags = 32;
+  bool quantity_enabled = 33;
+  bool quick_shop = 34;
+  float price = 35; 
+  string created_at = 36;
+  string updated_at = 37;
+  uint64 related_product_id = 38;
+}
+
+message ReviewItem {
+  uint64 id = 1;
+  string name = 2;
+  string date = 3;
+  string avatar = 4;
+  int32 rating = 5;
+  bool verified = 6;
+  string comment = 7;
+  repeated string images = 8;
+  repeated string videos = 9;
+}
+
+message ReviewSummary {
+  repeated ReviewItem reviews = 1;
+  int32 rating_count = 2;
+  float rating_average = 3;
+  map<string, int32> rating = 4; 
+}
+
+message Faq {
+  uint64 id = 1;
+  string question = 2;
+  string answer = 3;
+}
+
+message Slider {
+  string img_src = 1;
+  string title = 2;
+  string sub_text = 3;
+  string description = 4;
+} 
+
+message Banner {
+  uint64 id = 1;
+  string image_url = 2;
+  string alt = 3;
+  string title = 4;
+  string description = 5;
+  optional string video_url = 6;
+  optional string video_type = 7;
+}
+
+message BlogCategory {
+  string title = 2;
+  string slug = 3;
+}
+
+message Blog {
+  uint64 id = 1;
+  string slug = 2;
+  BlogCategory category = 3;
+  string image_url = 4;
+  string alt = 5;
+  string title = 6;
+  string content = 7; 
+}
+
+
+message ProductListResponse {
+  repeated Product products = 1;
+}
+
+message GetProductBySlugRequest {
+  string slug = 1;
+  string country_code = 2;
+}
+
+message GetProductsByCategoryRequest {
+  string category = 1; 
+  string country_code = 2;
+}
+
+message ShopSearchParams {
+  bool is_featured = 1;
+  bool is_trending = 2;
+  bool is_new = 3;
+  bool is_on_sale = 4;
+  string country_code = 5;
+}
+
+message GalleryListResponse {
+  repeated Gallery galleries = 1;
+}
+
+message FaqListResponse {
+  repeated Faq faqs = 1;
+}
+
+message SliderListResponse {
+  repeated Slider sliders = 1;
+}
+
+message CategoryListResponse {
+  repeated Category categories = 1;
+}
+
+message BannerListResponse {
+  repeated Banner banners = 1;
+}
+
+message BlogListResponse {
+  repeated Blog blogs = 1;
+}
+
+message GetBlogBySlugRequest {
+  string slug = 1;
+  string country_code = 2;
+}
+
+message BlogDetailResponse {
+  Blog blog = 1;
+}
+
+message GetRelatedProductsRequest{
+    uint64 id = 1;
+    string country_code = 2;
+}
+
+message GetProductReviewsRequest{
+    uint64 id = 1;
+    string country_code = 2;
+}
+
+message GetSocialProductVideoRequest{
+    uint64 id = 1;
+    string country_code = 2;
+}
+
+message GetProductFaqsRequest {
+    uint64 id = 1;
+    string country_code = 2;
+}
+
+
+message CreateProductRequest {
+  Product product = 1;
+}
+
+message FileData {
+  string filename = 1;
+  bytes content = 2;
+}
+
+message UploadFileRequest {
+  repeated FileData files = 1; 
+}
+
+message UploadedFileInfo {
+  string file_id = 1;
+  string url = 2;
+}
+message UploadFileResponse {
+  repeated UploadedFileInfo files = 1; 
+}
+
+message DeleteFileRequest {
+  string file_url = 1;
+}
+
+message DeleteFileResponse {
+  bool success = 1;
+}
+
+message CreateProductFaqRequest {
+  uint64 product_id = 1;
+  string question = 2;
+  string answer = 3;
+}
+
+message CreateProductReviewRequest {
+  uint64 product_id = 1 [(validate.rules).uint64.gt = 0];
+  string name = 2 [(validate.rules).string = {min_len: 2, max_len: 100}];
+  string email = 3 [(validate.rules).string.email = true];
+  string avatar = 4;
+  int32 rating = 5 [(validate.rules).int32 = {gte: 1, lte: 5}];
+  string comment = 6 [(validate.rules).string.max_len = 1000];
+  repeated string images = 7;
+  repeated string videos = 8;
+}
+
+message CreateNewBlogRequest {
+  string title = 1;
+  string content = 2;
+  string category = 3;
+  string image_url = 4;
+  string slug = 5;
+  string alt = 6;
+  string country_code = 7;
+}
+
+message CreateOptionRequest {
+  uint64 product_id = 1;
+  string name = 2;
+  string code = 3;
+  int32 position = 4;
+}
+
+message CreateOptionValueRequest {
+  uint64 option_id = 1;
+  string value = 2;
+  string color_code = 3;
+}
+
+
+message LoginRequest {
+  string email = 1 [(validate.rules).string.email = true];
+  string password = 2 [(validate.rules).string.min_len = 6];
+}
+
+message LoginResponse {
+  string access_token = 1; 
+  int64 access_expire = 2; 
+}
+
+
+message CartItem {
+  uint64 variant_id = 1 [(validate.rules).uint64.gt = 0]; 
+  uint64 product_id = 2 [(validate.rules).uint64.gt = 0]; 
+  int32 quantity = 3 [(validate.rules).int32.gt = 0];     
+}
+
+message CreateOrderRequest {
+  repeated CartItem items = 1 [(validate.rules).repeated.min_items = 1]; 
+  
+  optional string customer_email = 2 [(validate.rules).string = {email: true, ignore_empty: true}]; 
+  
+  optional string customer_name = 3 [(validate.rules).string = {min_len: 2, ignore_empty: true}];
+  
+  optional string customer_phone = 4 [(validate.rules).string = {pattern: "^\\+?[0-9]{7,15}$", ignore_empty: true}];
+  
+  optional string shipping_address = 5 [(validate.rules).string = {max_len: 1000, ignore_empty: true}];
+  
+  string shipping_method = 6 [(validate.rules).string.max_len = 100];
+}
+
+message CreateOrderResponse {
+  string local_order_id = 1;  
+  string paypal_order_id = 2;
+  float total_amount = 3;     
+}
+
+message CaptureOrderRequest {
+  string paypal_order_id = 1 [(validate.rules).string.min_len = 5]; 
+}
+
+message CaptureOrderResponse {
+  bool success = 1;
+  string status = 2;  
+  string message = 3; 
+}
+
+
+
+message VariantInventory {
+  uint64 variant_id = 1;
+  int32 stock_quantity = 2;
+}
+
+message GetInventoryRequest {
+  uint64 product_id = 1 [(validate.rules).uint64.gt = 0]; 
+}
+
+message GetInventoryResponse {
+  uint64 product_id = 1;
+  int32 total_stock = 2; 
+  repeated VariantInventory variant_stocks = 3;
+}
+
+message GetFrequentlyBoughtProductsRequest {
+  uint64 product_id = 1 [(validate.rules).uint64.gt = 0];
+  string country_code = 2;
+}
+
+message ChatbotRequest {
+    string message = 1;
+}
+
+message ChatbotResponse {
+    string reply = 1;
+}
+
+message GetGuestTokenRequest {}
+
+message GetGuestTokenResponse {
+    string token = 1;
+    int64 expire_at = 2;
+}
+
+message PayPalWebhookRequest {
+  bytes raw_body = 1;                   
+  map<string, string> headers = 2;      
+  string event_type = 3;                
+}
+
+message WebhookResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+
+
+service Dropshipbe {
+
+  // --- Inventory ---
+  rpc GetInventory (GetInventoryRequest) returns (GetInventoryResponse);
+  // --- Products ---
+  rpc GetProducts (DefaultRequest) returns (ProductListResponse);
+  rpc GetProductBySlug (GetProductBySlugRequest) returns (Product);
+  rpc GetProductsByCategory (GetProductsByCategoryRequest) returns (ProductListResponse);
+  rpc GetRelatedProducts (GetRelatedProductsRequest) returns (ProductListResponse);
+  rpc GetFeaturedProducts (DefaultRequest) returns (ProductListResponse);
+  rpc GetNewProducts (DefaultRequest) returns (ProductListResponse);
+  rpc CreateProduct (CreateProductRequest) returns (Product);
+  rpc GetFrequentlyBoughtProducts (GetFrequentlyBoughtProductsRequest) returns (ProductListResponse);
+  // --- Shop Search ---
+  rpc GetShop (ShopSearchParams) returns (ProductListResponse);
+
+  // --- Media/Galleries ---
+  rpc GetSocialProductVideos (GetSocialProductVideoRequest) returns (GalleryListResponse);
+
+  // --- FAQs ---
+  rpc GetProductFaqs (GetProductFaqsRequest) returns (FaqListResponse);
+  rpc CreateProductFaq (CreateProductFaqRequest) returns (Faq);
+
+  // --- Reviews ---
+  rpc GetProductReviews (GetProductReviewsRequest) returns (ReviewSummary);
+  rpc CreateProductReview (CreateProductReviewRequest) returns (ReviewItem);
+
+  // --- UI Items (Sliders, Categories, Banners) ---
+  rpc GetSliderItems (DefaultRequest) returns (SliderListResponse);
+  rpc GetCategoryItems (DefaultRequest) returns (CategoryListResponse);
+  rpc GetBannerItems (DefaultRequest) returns (BannerListResponse);
+  rpc GetVideoBanner (DefaultRequest) returns (Banner);
+
+  // --- Blogs ---
+  rpc GetBlogItems (DefaultRequest) returns (BlogListResponse);
+  rpc GetBlogBySlug (GetBlogBySlugRequest) returns (BlogDetailResponse);
+  rpc CreateNewBlog (CreateNewBlogRequest) returns (Blog);
+
+  // --- Options ---
+  rpc CreateOption (CreateOptionRequest) returns (Option);
+  rpc CreateOptionValue (CreateOptionValueRequest) returns (OptionValue);
+
+  // --- Authentication ---
+  rpc Login (LoginRequest) returns (LoginResponse);
+  
+  // --- Files ---
+  rpc UploadFile (UploadFileRequest) returns (UploadFileResponse);
+  rpc DeleteFile (DeleteFileRequest) returns (DeleteFileResponse);
+
+  // --- Orders & Checkout ---
+  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
+  rpc CaptureOrder (CaptureOrderRequest) returns (CaptureOrderResponse);
+
+  // --- Webhooks () ---
+  rpc HandlePaypalWebhook (PayPalWebhookRequest) returns (WebhookResponse);
+
+  // --- System ---
+  rpc Ping(Request) returns(Response);
+
+  // API  Chatbot AI
+  rpc ChatbotMessage(ChatbotRequest) returns (ChatbotResponse);
+
+  //Guest token for chatbot
+  rpc GetGuestToken(GetGuestTokenRequest) returns (GetGuestTokenResponse);
+}

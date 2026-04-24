@@ -1,0 +1,8 @@
+2026-04-16T15:32:51.884+07:00	[34;1m info [0;22m	✅ Hệ thống Log đã sẵn sàng	caller=dropshipbe/dropshipbe.go:52
+2026-04-16T15:32:51.884+07:00	[34;1m info [0;22m	🔄 Đang đồng bộ tồn kho từ Database lên Redis...	caller=dropshipbe/dropshipbe.go:55
+2026-04-16T15:32:51.890+07:00	[34;1m info [0;22m	✅ Nạp tồn kho thành công. Hệ thống sẵn sàng!	caller=dropshipbe/dropshipbe.go:60
+2026-04-16T15:32:51.890+07:00	[34;1m info [0;22m	Starting rpc server at 0.0.0.0:8080...
+	caller=dropshipbe/dropshipbe.go:72
+2026-04-16T15:37:15.282+07:00	[34;1m info [0;22m	127.0.0.1:50469 - /dropshipbe.Dropshipbe/CreateProductReview - {"product_id":1,"name":"Nguyễn Văn A","email":"nguyenvana@example.com","avatar":"1774248637152917000_singapore-1.jpg","rating":5,"comment":"Sản phẩm rất tuyệt vời, đóng gói cẩn thận!","images":["1774248637152917000_singapore-1.jpg","1774248637152917000_singapore-1.jpg"],"videos":["1774248637152917000_singapore-1.jpg"]}	caller=serverinterceptors/statinterceptor.go:94	trace=27f777db8eb72a53a7519652d6c5e32d	span=89c5eb6239a8874a	duration=16.2ms
+2026-04-16T15:48:25.538+07:00	[34;1m info [0;22m	Got signal 2, shutting down...	caller=proc/shutdown.go:84
+2026-04-16T15:48:27.372+07:00	[34;1m info [0;22m	Got signal 2, shutting down...	caller=proc/shutdown.go:84

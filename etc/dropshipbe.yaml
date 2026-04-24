@@ -1,0 +1,70 @@
+Name: ${APP_NAME}
+ListenOn: ${LISTEN_ON}
+
+Timeout: ${TIMEOUT}
+
+Log:
+  ServiceName: ${APP_NAME}
+  Mode: ${LOG_MODE}      
+  Level: ${LOG_LEVEL}       
+  Path: ${LOG_PATH}         
+  KeepDays: ${LOG_KEEP_DAYS}   
+  Encoding: ${LOG_ENCODING}
+
+DB:
+  Host: ${DB_HOST}
+  Port: ${DB_PORT}
+  User: ${DB_USER}
+  Password: ${DB_PASSWORD}
+  DBName: ${DB_NAME}
+  SSLMode: ${DB_SSL_MODE}
+  MaxOpenConns: ${DB_MAX_OPEN_CONNS}
+  MaxIdleConns: ${DB_MAX_IDLE_CONNS}
+
+CacheConf: 
+  - Host: ${CACHE_HOST}
+    Pass: ${CACHE_PASS}
+
+CacheTTL: ${CACHE_TTL_MINUTES} 
+
+Jwt:
+  Secret: ${JWT_SECRET_KEY}
+  ExpireHours: ${JWT_EXPIRE_HOURS}
+
+R2:
+  AccountID: ${R2_ACCOUNT_ID}
+  AccessKey: ${R2_ACCESS_KEY}
+  SecretKey: ${R2_SECRET_KEY}
+  BucketName: ${R2_BUCKET_NAME}
+  LinkExpiration: ${R2_LINK_EXPIRATION_MINUTES}
+
+VALIDATE:
+  EmailRegex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+  PhoneRegex: "^\\+?[1-9]\\d{1,14}$"
+  StorageMaxSize: ${VALIDATE_STORAGE_MAX_SIZE} 
+  AllowedFileTypes:
+    - image/jpeg
+    - image/png
+    - image/gif
+
+KqPusherConf:
+  Brokers:
+    - ${KAFKA_BROKER_1}  
+    - ${KAFKA_BROKER_2} 
+    - ${KAFKA_BROKER_3}
+  OrderTopic: ${KQPUSHER_ORDER_TOPIC}
+  NotificationTopic: ${KQPUSHER_NOTIFICATION_TOPIC}  
+  EmailMarketingTopic: ${KQPUSHER_EMAIL_MARKETING_TOPIC}
+  ChunkSize: ${KQPUSHER_CHUNK_SIZE}       
+  FlushInterval: ${KQPUSHER_FLUSH_INTERVAL}   
+
+PayPal:
+  Mode: ${PAYPAL_MODE} 
+  ClientID: ${PAYPAL_CLIENT_ID}
+  Secret: ${PAYPAL_SECRET}
+  PaypalBaseURL: ${PAYPAL_BASE_URL}
+  WebhookID: ${PAYPAL_WEBHOOK_ID}
+
+OPENAI:
+  APIKey: ${OPENAI_API_KEY}
+

@@ -1,0 +1,44 @@
+2026-04-16T15:33:51.885+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.3Mi, TotalAlloc=6.9Mi, Sys=19.1Mi, NumGC=3	caller=stat/usage.go:82
+2026-04-16T15:33:51.902+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:34:51.885+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.3Mi, TotalAlloc=6.9Mi, Sys=19.1Mi, NumGC=3	caller=stat/usage.go:82
+2026-04-16T15:34:51.903+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:35:51.885+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.4Mi, TotalAlloc=7.3Mi, Sys=19.1Mi, NumGC=4	caller=stat/usage.go:82
+2026-04-16T15:35:51.903+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:36:51.885+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.4Mi, TotalAlloc=7.3Mi, Sys=19.1Mi, NumGC=4	caller=stat/usage.go:82
+2026-04-16T15:36:51.903+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:37:51.885+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.5Mi, TotalAlloc=7.5Mi, Sys=19.1Mi, NumGC=5	caller=stat/usage.go:82
+2026-04-16T15:37:51.903+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 1, pass: 1, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:38:15.284+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 16.0ms, med: 16.2ms, 90th: 16.2ms, 99th: 16.2ms, 99.9th: 16.2ms	caller=stat/metrics.go:210
+2026-04-16T15:38:51.885+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.5Mi, TotalAlloc=7.5Mi, Sys=19.1Mi, NumGC=5	caller=stat/usage.go:82
+2026-04-16T15:38:51.904+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:39:15.284+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2026-04-16T15:39:51.886+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.6Mi, TotalAlloc=7.7Mi, Sys=19.1Mi, NumGC=6	caller=stat/usage.go:82
+2026-04-16T15:39:51.903+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:40:15.284+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2026-04-16T15:40:51.886+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.6Mi, TotalAlloc=7.7Mi, Sys=19.1Mi, NumGC=6	caller=stat/usage.go:82
+2026-04-16T15:40:51.904+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:41:15.284+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2026-04-16T15:41:51.887+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.5Mi, TotalAlloc=7.8Mi, Sys=19.1Mi, NumGC=7	caller=stat/usage.go:82
+2026-04-16T15:41:51.904+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:42:15.284+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2026-04-16T15:42:51.887+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.6Mi, TotalAlloc=7.8Mi, Sys=19.1Mi, NumGC=7	caller=stat/usage.go:82
+2026-04-16T15:42:51.904+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:43:15.285+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2026-04-16T15:43:51.886+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.6Mi, TotalAlloc=7.9Mi, Sys=19.1Mi, NumGC=8	caller=stat/usage.go:82
+2026-04-16T15:43:51.905+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:44:15.285+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2026-04-16T15:44:51.886+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.6Mi, TotalAlloc=7.9Mi, Sys=19.1Mi, NumGC=8	caller=stat/usage.go:82
+2026-04-16T15:44:51.905+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:45:15.285+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2026-04-16T15:45:51.887+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.5Mi, TotalAlloc=8.0Mi, Sys=19.1Mi, NumGC=9	caller=stat/usage.go:82
+2026-04-16T15:45:51.904+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:46:15.285+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2026-04-16T15:46:51.888+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.5Mi, TotalAlloc=8.0Mi, Sys=19.1Mi, NumGC=9	caller=stat/usage.go:82
+2026-04-16T15:46:51.905+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:47:15.286+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2026-04-16T15:47:51.888+07:00	[32;1m stat [0;22m	CPU: 0m, MEMORY: Alloc=4.6Mi, TotalAlloc=8.1Mi, Sys=19.1Mi, NumGC=10	caller=stat/usage.go:82
+2026-04-16T15:47:51.906+07:00	[32;1m stat [0;22m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:48:15.286+07:00	[32;1m stat [0;22m	(dropshipbe.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2m	CPU: 0m, MEMORY: Alloc=4.2Mi, TotalAlloc=7.3Mi, Sys=19.1Mi, NumGC=10	caller=stat/usage.go:82
+2026-04-16T15:48:05.517+07:00	[32;1m stat [0;22m	(api) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2026-04-16T15:48:15.285+07:00	[32;1m stat [0;22m	(dropship-gateway) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210

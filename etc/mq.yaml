@@ -1,0 +1,33 @@
+Name: MQ
+
+Log:
+  ServiceName: MQ
+  Mode: ${LOG_MODE}      
+  Level: ${LOG_LEVEL}       
+  Path: ${LOG_PATH}         
+  KeepDays: ${LOG_KEEP_DAYS}   
+  Encoding: ${LOG_ENCODING}
+
+# ==========================================
+# CẤU HÌNH KAFKA CONSUMER (go-queue kq)
+# ==========================================
+NotificationConsumer:
+  Name: notification-consumer
+  Brokers:
+    - ${KAFKA_BROKER_1}  
+    - ${KAFKA_BROKER_2} 
+    - ${KAFKA_BROKER_3}
+  Group: dropship-notification-group
+  Topic: ${KQPUSHER_NOTIFICATION_TOPIC}
+  Offset: first
+  Consumers: 3
+
+Telegram:
+  BotToken: ${TELEGRAM_BOT_TOKEN}
+  ChatID: ${TELEGRAM_CHAT_ID}
+
+Email:
+  Region: ${AWS_REGION}             
+  AccessKey: ${AWS_ACCESS_KEY_ID}
+  SecretKey: ${AWS_SECRET_ACCESS_KEY}
+  FromAddress: ${EMAIL_FROM_ADDRESS}

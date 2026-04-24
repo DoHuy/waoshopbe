@@ -1,0 +1,97 @@
+Name: ${GATEWAY_NAME}
+Host: ${GATEWAY_HOST}
+Port: ${GATEWAY_PORT}
+
+Redis:
+  Host: ${CACHE_HOST}
+  Type: ${CACHE_TYPE}
+  Pass: ${CACHE_PASS}
+
+Jwt:
+  Secret: ${JWT_SECRET_KEY}
+  ExpireHours: ${JWT_EXPIRE_HOURS}
+
+Log:
+  ServiceName: Gateway
+  Mode: ${LOG_MODE}      
+  Level: ${LOG_LEVEL}       
+  Path: ${LOG_PATH}         
+  KeepDays: ${LOG_KEEP_DAYS}   
+  Encoding: ${LOG_ENCODING}
+
+Upstreams:
+  - Grpc:
+      Target: ${RPC_SERVER_TARGET}
+      Timeout: ${TIMEOUT}    
+    ProtoSets:
+      - dropshipbe.pb
+    Mappings:
+      - Method: get
+        Path: /api/v1/ping
+        RpcPath: dropshipbe.Dropshipbe/Ping
+      - Method: get
+        Path: /api/v1/products
+        RpcPath: dropshipbe.Dropshipbe/GetProducts
+      - Method: get
+        Path: /api/v1/banners
+        RpcPath: dropshipbe.Dropshipbe/GetBannerItems
+      - Method: get
+        Path: /api/v1/blogs/:slug
+        RpcPath: dropshipbe.Dropshipbe/GetBlogBySlug
+      - Method: get
+        Path: /api/v1/blogs
+        RpcPath: dropshipbe.Dropshipbe/GetBlogItems
+      - Method: get
+        Path: /api/v1/categories
+        RpcPath: dropshipbe.Dropshipbe/GetCategoryItems
+      - Method: get
+        Path: /api/v1/featured-products
+        RpcPath: dropshipbe.Dropshipbe/GetFeaturedProducts
+      - Method: get
+        Path: /api/v1/new-products
+        RpcPath: dropshipbe.Dropshipbe/GetNewProducts
+      - Method: get
+        Path: /api/v1/products/:slug
+        RpcPath: dropshipbe.Dropshipbe/GetProductBySlug
+      - Method: get
+        Path: /api/v1/products/:id/faqs
+        RpcPath: dropshipbe.Dropshipbe/GetProductFaqs
+      - Method: get
+        Path: /api/v1/products/:id/reviews
+        RpcPath: dropshipbe.Dropshipbe/GetProductReviews
+      - Method: get
+        Path: /api/v1/categories/:category/products
+        RpcPath: dropshipbe.Dropshipbe/GetProductsByCategory   
+      - Method: get
+        Path: /api/v1/products/:id/related-products
+        RpcPath: dropshipbe.Dropshipbe/GetRelatedProducts
+      - Method: get
+        Path: /api/v1/shop
+        RpcPath: dropshipbe.Dropshipbe/GetShop
+      - Method: get
+        Path: /api/v1/slider-items
+        RpcPath: dropshipbe.Dropshipbe/GetSliderItems
+      - Method: get
+        Path: /api/v1/social-product-videos
+        RpcPath: dropshipbe.Dropshipbe/GetSocialProductVideos
+      - Method: get
+        Path: /api/v1/video-banner
+        RpcPath: dropshipbe.Dropshipbe/GetVideoBanner
+      - Method: post
+        Path: /api/v1/products/reviews
+        RpcPath: dropshipbe.Dropshipbe/CreateProductReview
+      - Method: post
+        Path: /api/v1/order/create
+        RpcPath: dropshipbe.Dropshipbe/CreateOrder
+      - Method: post
+        Path: /api/v1/order/capture
+        RpcPath: dropshipbe.Dropshipbe/CaptureOrder   
+      - Method: get
+        Path: /api/v1/products/:product_id/inventory
+        RpcPath: dropshipbe.Dropshipbe/GetInventory                
+      - Method: get
+        Path: /api/v1/products/:product_id/frequently-bought
+        RpcPath: dropshipbe.Dropshipbe/GetFrequentlyBoughtProducts                           
+      - Method: get
+        Path: /api/v1/guest-token
+        RpcPath: dropshipbe.Dropshipbe/GetGuestToken

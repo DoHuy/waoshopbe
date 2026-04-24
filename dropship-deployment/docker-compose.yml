@@ -1,0 +1,207 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # 1. DATABASE & CACHE
+  # ==========================================
+  db:
+    image: pgvector/pgvector:pg15
+    container_name: uk_dropship_db
+    restart: always
+    environment:
+      - POSTGRES_USER=huydv
+      - POSTGRES_PASSWORD=SecretPassword123
+      - POSTGRES_DB=uk_dropship_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - uk_dropship_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U huydv -d uk_dropship_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  redis:
+    image: redis:7-alpine
+    container_name: uk_dropship_redis
+    restart: always
+    command: redis-server --requirepass SecretRedisPassword123
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - uk_dropship_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "SecretRedisPassword123", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ==========================================
+  # 2. KAFKA CLUSTER (3 BROKERS - KRAFT MODE)
+  # ==========================================
+  kafka1:
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: uk_dropship_kafka1
+    restart: always
+    networks:
+      - uk_dropship_net
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: 1
+      CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka1:9091,2@kafka2:9091,3@kafka3:9091"
+      KAFKA_LISTENERS: "PLAINTEXT://:29092,CONTROLLER://:9091,EXTERNAL://0.0.0.0:9092"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka1:29092,EXTERNAL://127.0.0.1:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    volumes:
+      - kafka1_data:/var/lib/kafka/data
+
+  kafka2:
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: uk_dropship_kafka2
+    restart: always
+    networks:
+      - uk_dropship_net
+    ports:
+      - "9093:9093"
+    environment:
+      KAFKA_NODE_ID: 2
+      CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka1:9091,2@kafka2:9091,3@kafka3:9091"
+      KAFKA_LISTENERS: "PLAINTEXT://:29092,CONTROLLER://:9091,EXTERNAL://0.0.0.0:9093"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka2:29092,EXTERNAL://127.0.0.1:9093"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    volumes:
+      - kafka2_data:/var/lib/kafka/data
+
+  kafka3:
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: uk_dropship_kafka3
+    restart: always
+    networks:
+      - uk_dropship_net
+    ports:
+      - "9094:9094"
+    environment:
+      KAFKA_NODE_ID: 3
+      CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka1:9091,2@kafka2:9091,3@kafka3:9091"
+      KAFKA_LISTENERS: "PLAINTEXT://:29092,CONTROLLER://:9091,EXTERNAL://0.0.0.0:9094"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka3:29092,EXTERNAL://127.0.0.1:9094"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    volumes:
+      - kafka3_data:/var/lib/kafka/data
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: uk_dropship_kafka_ui
+    ports:
+      - "8080:8080"
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=uk_dropship_cluster
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka1:29092,kafka2:29092,kafka3:29092
+    networks:
+      - uk_dropship_net
+    depends_on:
+      - kafka1
+      - kafka2
+      - kafka3
+
+  # ==========================================
+  # 3. APPLICATION SERVICES (GO-ZERO)
+  # ==========================================
+  
+  dropship-rpc:
+    build:
+      context: . 
+      args:
+        BUILD_TARGET: dropshipbe.go
+    container_name: uk_dropship_rpc
+    restart: always
+    env_file:
+      - ../.env
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
+      - KAFKA_BROKER_1=kafka1:29092
+      - KAFKA_BROKER_2=kafka2:29092
+      - KAFKA_BROKER_3=kafka3:29092
+    command: ["./app_service", "-f", "etc/dropshipbe.yaml"]
+    networks:
+      - uk_dropship_net
+    depends_on:
+      db:
+        condition: service_healthy 
+      redis:
+        condition: service_healthy
+      kafka1:
+        condition: service_started
+
+  dropship-gateway:
+    build:
+      context: .
+      args:
+        BUILD_TARGET: gateway/gateway.go
+    container_name: uk_dropship_gateway
+    restart: always
+    env_file:
+      - ../.env
+    environment:
+      - REDIS_HOST=redis
+    command: ["./app_service", "-f", "etc/gateway.yaml"]
+    ports:
+      - "8888:8888"
+    networks:
+      - uk_dropship_net
+    depends_on:
+      dropship-rpc:
+        condition: service_started
+
+  dropship-mq:
+    build:
+      context: .
+      args:
+        BUILD_TARGET: mq/mq.go
+    container_name: uk_dropship_mq
+    restart: always
+    env_file:
+      - ../.env
+    environment:
+      - KAFKA_BROKER_1=kafka1:29092
+      - KAFKA_BROKER_2=kafka2:29092
+      - KAFKA_BROKER_3=kafka3:29092
+    command: ["./app_service", "-f", "etc/mq.yaml"]
+    networks:
+      - uk_dropship_net
+    depends_on:
+      dropship-rpc:
+        condition: service_started
+      kafka1:
+        condition: service_started
+
+volumes:
+  redis_data:
+  kafka1_data:
+  kafka2_data:
+  kafka3_data:
+
+networks:
+  uk_dropship_net:
+    driver: bridge
