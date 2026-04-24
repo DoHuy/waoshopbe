@@ -118,7 +118,7 @@ cp env.sample .env
 ### Start Infrastructure
 Use Docker Compose to start PostgreSQL, Redis, and Kafka:
 ```bash
-docker-compose -f dropship-deployment/docker-compose.yml up -d
+docker-compose -f dropship-deployment/docker-compose.yml up redis kafka1 kafka2 kafka3 db -d
 ```
 Verify the services are running:
 ```bash
