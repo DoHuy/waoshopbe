@@ -8,9 +8,6 @@ Log:
   KeepDays: ${LOG_KEEP_DAYS}   
   Encoding: ${LOG_ENCODING}
 
-# ==========================================
-# CẤU HÌNH KAFKA CONSUMER (go-queue kq)
-# ==========================================
 NotificationConsumer:
   Name: notification-consumer
   Brokers:

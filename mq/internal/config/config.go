@@ -12,7 +12,7 @@ type Config struct {
 	FulfillmentConsumer  kq.KqConf `json:",optional"`
 	Telegram             struct {
 		BotToken string
-		ChatID   string
+		ChatID   int64
 	}
 	Email struct {
 		Region      string

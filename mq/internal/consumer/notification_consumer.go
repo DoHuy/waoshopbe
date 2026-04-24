@@ -70,7 +70,7 @@ func (c *NotificationConsumer) handleOrderPaid(ctx context.Context, payload kafk
 		payload.OrderNumber, payload.CustomerName, payload.TotalAmount, payload.Currency,
 	)
 
-	err := notify.SendTelegramMessage(c.Config.Telegram.BotToken, c.Config.Telegram.ChatID, teleMsg)
+	err := notify.SendTelegramMessage(c.Config.Telegram.BotToken, fmt.Sprintf("%d", c.Config.Telegram.ChatID), teleMsg)
 	if err != nil {
 		c.Logger.Errorf("❌ Error sending Telegram for order %s: %v", payload.OrderNumber, err)
 	}

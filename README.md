@@ -149,6 +149,19 @@ You need to run the following components (preferably in separate terminals):
 
 ---
 
+### Run Backend System with only docker compose
+Copy env
+
+```bash
+cp env.docker.sample .env
+```
+Use Docker Compose to start project:
+```bash
+docker-compose -f dropship-deployment/docker-compose.yml up -d
+```
+
+---
+
 ## 2. Frontend Setup (`storefront`)
 
 Navigate to the storefront directory:

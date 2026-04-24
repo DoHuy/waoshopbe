@@ -32,4 +32,6 @@ COPY --from=builder /app/app_service .
 
 COPY etc/ ./etc/
 
+COPY --from=builder /app/*.pb .
+
 CMD ["./app_service"]
